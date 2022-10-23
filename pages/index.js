@@ -40,7 +40,9 @@ export async function getStaticProps() {
     return {
         props: {
             meetups: DUMMY_MEET_UP
-        }
+        },
+        /* Nombre de seconde pour que la page soit mis à jour au niveau du backend */
+        revalidate: 10
     }
 }
 
