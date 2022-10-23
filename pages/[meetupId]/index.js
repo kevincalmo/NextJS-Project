@@ -1,15 +1,23 @@
 import { MongoClient, ObjectId } from 'mongodb';
+import Head from 'next/head';
 import React from 'react'
 import MeetupDetail from '../../components/meetups/MeetupDetail';
 
 const MeetupId = (props) => {
     return (
-        <MeetupDetail
-            img={props.meetupData.image}
-            title={props.meetupData.title}
-            address={props.meetupData.address}
-            description={props.meetupData.description}
-        />
+        <>
+            <Head>
+                <title>{props.meetupData.title} - React Meetups</title>
+                <meta name='description' content={props.meetupData.description} />
+            </Head>
+            <MeetupDetail
+                img={props.meetupData.image}
+                title={props.meetupData.title}
+                address={props.meetupData.address}
+                description={props.meetupData.description}
+            />
+        </>
+
     )
 }
 // function obligatoire avec getStaticProps dans une page dynamique
