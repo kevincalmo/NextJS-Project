@@ -1,4 +1,5 @@
 import React from 'react'
+import { MongoClient } from 'mongodb';
 import MeetupList from '../components/meetups/MeetupList';
 
 const DUMMY_MEET_UP = [
@@ -50,9 +51,24 @@ const HomePage = (props) => {
 /* Exécution au moment de la commande ' yarn run buil ou npm run build ' */
 export async function getStaticProps() {
     // Send a http request and fetch data
+    const client = await MongoClient.connect('mongodb+srv://user:u4MYuV6t3x8F9q5@cluster0.t2bhv8j.mongodb.net/meetups?retryWrites=true&w=majority')
+    const db = client.db()
+    const meetupsCollection = db.collection('meetups');
+    const meetups = await meetupsCollection.find().toArray();
+    client.close();
+    console.log(meetups);
+
     return {
         props: {
-            meetups: DUMMY_MEET_UP
+            meetups: meetups.map((meetup )=> (
+                {
+                    id: meetup._id.toString(),
+                    title: meetup.title,
+                    address: meetup.address,
+                    image: meetup.image,
+                    description: meetup.description
+                }
+            ))
         },
         // Nombre de seconde pour que la page soit mis à jour au niveau du backend
         revalidate: 10
