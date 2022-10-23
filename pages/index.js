@@ -27,7 +27,7 @@ const HomePage = () => {
     ];
     return (
         <>
-        <MeetupList meetups={DUMMY_MEET_UP} />
+            <MeetupList meetups={DUMMY_MEET_UP} />
         </>
     )
 }
