@@ -35,13 +35,26 @@ const HomePage = (props) => {
     )
 }
 
+/* Exécution pour chaque demande dont chaque rechargement de page */
+/* export async function getServerSideProps(context) {
+    const req = context.req;
+    const res = context.res;
+    //fetch data from a API
+    return {
+        props: {
+            meetups: DUMMY_MEET_UP
+        }
+    }
+} */
+
+/* Exécution au moment de la commande ' yarn run buil ou npm run build ' */
 export async function getStaticProps() {
     // Send a http request and fetch data
     return {
         props: {
             meetups: DUMMY_MEET_UP
         },
-        /* Nombre de seconde pour que la page soit mis à jour au niveau du backend */
+        // Nombre de seconde pour que la page soit mis à jour au niveau du backend
         revalidate: 10
     }
 }
